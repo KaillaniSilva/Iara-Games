@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Iara Games - Home</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="./Css/style.css"/>
+</head>
+<body class="bg-dark text-white">
+
+ <!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-black px-4">
+  <div class="container-fluid">
+    <a class="navbar-brand d-flex align-items-center" href="#">
+      <img src="./Imagens/Component 1.svg" alt="Logo Iara Games" width="200" height="80" class="me-2">
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Itens do menu -->
+    <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+      <ul class="navbar-nav mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" href="#">Jogos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Downloads</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="./Pages/index.html">Loja</a>
+        </li>
+      </ul>
+      <!-- Container para o ícone de pessoa (React vai injetar aqui) -->
+      <div id="user-icon-container"></div>
+    </div>
+  </div>
+</nav>
+
+<!-- Banner -->
+<header class="conteiner my-5 navbar navbar-expand-lg navbar-dark bg-black">
+  <div class="container">
+    <div class="col-md-6 text-center mb-4 mb-md-0">
+      <img src="Imagens/GTA 6 Poster_Cover 🌴 • @rockstargames Let me know….jpeg" alt="Banner GTA 6" class="img-fluid rounded shadow">
+    </div>
+    <div class="col-md-6 d-flex flex-column justify-content-center align-items-center text-white text-center">
+      <h1 class="fw-bold">Grand Theft Auto VI</h1>
+      <p class="lead">Lançamento mais esperado do ano</p>
+      <a href="#" class="btn btn-purple mt-3" id="saibaMaisBtn">Saiba Mais</a>
+      <p class="mt-3 d-none" id="detalhesGTA">Vice City, gráficos ultrarrealistas, jogabilidade imersiva e multiplayer inovador.</p>
+    </div>
+  </div>
+</header>
+
+<!-- Cards dos jogos -->
+<section class="container my-5" id="jogos">
+  <h2 class="mb-4" style="color: white;">Jogos</h2>
+  <div class="row g-4" id="cardsContainer">
+    <!-- Cards serão carregados aqui -->
+  </div>
+  <div class="text-center my-5" id="verMaisContainer" style="display: none;">
+    <button class="btn btn-vermais text-white" id="verMaisBtn">Ver mais</button>
+  </div>
+</section>
+
+<!-- Formulário de contato -->
+<section class="container my-5">
+  <h2 class="text-white">Receba novidades</h2>
+  <form id="newsletterForm" class="row g-3">
+    <div class="col-md-6">
+      <input type="text" class="form-control" id="nome" placeholder="Seu nome" required>
+    </div>
+    <div class="col-md-6">
+      <input type="email" class="form-control" id="email" placeholder="Seu e-mail" required>
+    </div>
+    <div class="col-12">
+      <button type="submit" class="btn btn-vermais-verde">Cadastrar</button>
+    </div>
+  </form>
+  <div id="mensagemSucesso" class="mt-3 text-success d-none">Cadastro realizado com sucesso!</div>
+</section>
+
+<!-- Sessao sobre -->
+<section id="sobre" class="py-5" style="background-color: #111;">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-md-6 text-white">
+        <h2 class="mb-4">Sobre a Iara Games</h2>
+        <p>A Iara Games nasceu da paixão por jogos, inovação e tecnologia. Fundada por entusiastas do universo gamer, a empresa tem como missão criar experiências únicas que unem criatividade, diversão e qualidade. Com foco em acessibilidade e excelência, a Iara Games busca constantemente surpreender os jogadores, conectando histórias envolventes a mundos digitais imersivos. Aqui, cada jogo é mais do que um produto — é uma jornada pensada para todos.</p>
+      </div>
+      <div class="col-md-6 text-center">
+        <img src="./Imagens/Mulheres já são maioria nos jogos de videogame.jpeg" alt="Equipe Iara Games" class="img-fluid rounded shadow">
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="text-center p-4 bg-black">
+  © 2025 Iara Games. Todos os direitos reservados.
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- React via CDN -->
+<script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+<!-- Scripts React - Inline para garantir funcionamento -->
+<script type="text/babel" data-presets="react">
+// API mockada
+const api = {
+  usuariosMock: [
+    { id: 1, email: 'admin@iaragames.com', senha: 'admin123', nome: 'Administrador' },
+    { id: 2, email: 'usuario@teste.com', senha: 'senha123', nome: 'Usuário Teste' },
+    { id: 3, email: 'kaillani@iaragames.com', senha: '123456', nome: 'Kaillani' }
+  ],
+  
+  async delay(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  },
+  
+  async login(email, senha) {
+    await this.delay(1000);
+    const usuario = this.usuariosMock.find(u => u.email === email && u.senha === senha);
+    if (usuario) {
+      const { senha: _, ...usuarioSemSenha } = usuario;
+      return { success: true, usuario: usuarioSemSenha, token: `token_${usuario.id}_${Date.now()}` };
+    }
+    return { success: false, message: 'Email ou senha incorretos' };
+  },
+  
+  async verificarToken(token) {
+    await this.delay(500);
+    if (token && token.startsWith('token_')) {
+      const userId = token.split('_')[1];
+      const usuario = this.usuariosMock.find(u => u.id === parseInt(userId));
+      if (usuario) {
+        const { senha: _, ...usuarioSemSenha } = usuario;
+        return { success: true, usuario: usuarioSemSenha };
+      }
+    }
+    return { success: false, message: 'Token inválido' };
+  }
+};
+
+// Auth Context
+const AuthContext = React.createContext();
+
+const AuthProvider = ({ children }) => {
+  const [usuario, setUsuario] = React.useState(null);
+  const [token, setToken] = React.useState(localStorage.getItem('token'));
+  const [carregando, setCarregando] = React.useState(true);
+
+  React.useEffect(() => {
+    const tokenSalvo = localStorage.getItem('token');
+    if (tokenSalvo) {
+      api.verificarToken(tokenSalvo).then(resultado => {
+        if (resultado.success) {
+          setUsuario(resultado.usuario);
+          setToken(tokenSalvo);
+        } else {
+          localStorage.removeItem('token');
+          setToken(null);
+        }
+        setCarregando(false);
+      });
+    } else {
+      setCarregando(false);
+    }
+  }, []);
+
+  const fazerLogin = async (email, senha) => {
+    try {
+      const resultado = await api.login(email, senha);
+      if (resultado.success) {
+        setUsuario(resultado.usuario);
+        setToken(resultado.token);
+        localStorage.setItem('token', resultado.token);
+        localStorage.setItem('usuario', JSON.stringify(resultado.usuario));
+        return { success: true };
+      } else {
+        return { success: false, message: resultado.message };
+      }
+    } catch (erro) {
+      return { success: false, message: 'Erro ao fazer login. Tente novamente.' };
+    }
+  };
+
+  const fazerLogout = async () => {
+    setUsuario(null);
+    setToken(null);
+    localStorage.removeItem('token');
+    localStorage.removeItem('usuario');
+  };
+
+  return (
+    <AuthContext.Provider value={{ usuario, token, carregando, fazerLogin, fazerLogout, autenticado: !!usuario }}>
+      {children}
+    </AuthContext.Provider>
+  );
+};
+
+const useAuth = () => {
+  const context = React.useContext(AuthContext);
+  if (!context) throw new Error('useAuth deve ser usado dentro de AuthProvider');
+  return context;
+};
+
+// UserIcon Component
+const UserIcon = ({ onLoginClick }) => {
+  const { usuario, autenticado, fazerLogout } = useAuth();
+  const [menuAberto, setMenuAberto] = React.useState(false);
+  const menuRef = React.useRef(null);
+
+  React.useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        setMenuAberto(false);
+      }
+    };
+    if (menuAberto) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [menuAberto]);
+
+  const handleIconClick = () => {
+    if (autenticado) {
+      setMenuAberto(!menuAberto);
+    } else {
+      onLoginClick();
+    }
+  };
+
+  const handleLogout = () => {
+    fazerLogout();
+    setMenuAberto(false);
+  };
+
+  return (
+    <div className="menu-container" ref={menuRef}>
+      <button 
+        className="icon-pessoa-btn"
+        onClick={handleIconClick}
+        title={autenticado ? 'Menu do usuário' : 'Fazer login'}
+      >
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path 
+            d="M12 12C14.7614 12 17 9.76142 17 7C17 4.23858 14.7614 2 12 2C9.23858 2 7 4.23858 7 7C7 9.76142 9.23858 12 12 12Z" 
+            stroke="currentColor" 
+            strokeWidth="2" 
+            strokeLinecap="round" 
+            strokeLinejoin="round"
+          />
+          <path 
+            d="M20.5899 22C20.5899 18.13 16.7399 15 11.9999 15C7.25991 15 3.40991 18.13 3.40991 22" 
+            stroke="currentColor" 
+            strokeWidth="2" 
+            strokeLinecap="round" 
+            strokeLinejoin="round"
+          />
+        </svg>
+      </button>
+      {menuAberto && autenticado && (
+        <div className="menu-dropdown">
+          <div className="menu-item menu-user-info">
+            <div className="menu-user-name">{usuario?.nome}</div>
+            <div className="menu-user-email">{usuario?.email}</div>
+          </div>
+          <div className="menu-divider"></div>
+          <button className="menu-item menu-logout" onClick={handleLogout}>
+            Sair
+          </button>
+        </div>
+      )}
+    </div>
+  );
+};
+
+// GameCards Component
+const GameCards = () => {
+  const todosCards = [
+    { titulo: "Grand Theft Auto V", imagem: "./Imagens/GTA 5.jpeg" },
+    { titulo: "Red Dead Redemption 2", imagem: "./Imagens/RED DEAD.jpeg" },
+    { titulo: "Bully", imagem: "./Imagens/Bully.jpeg" },
+    { titulo: "Call Of Duty", imagem: "./Imagens/Call Dutty.jpeg" },
+    { titulo: "Gears of War", imagem: "./Imagens/GEARS OF WAR.jpeg" },
+    { titulo: "Grand Theft Auto IV", imagem: "./Imagens/GTA 4.jpeg" },
+    { titulo: "Grand Theft Auto VI", imagem: "./Imagens/GTA 6 POSTER.jpeg" },
+    { titulo: "Grand Theft Auto San Andres", imagem: "./Imagens/GTA SAN ANDRES.jpeg" },
+    { titulo: "Call of Duty: Warzone", imagem: "./Imagens/Call Dutty.jpeg" }
+  ];
+
+  const [cardsExibidos, setCardsExibidos] = React.useState(3);
+  const qtdePorClique = 3;
+  const cardsParaExibir = todosCards.slice(0, cardsExibidos);
+  const temMaisCards = cardsExibidos < todosCards.length;
+
+  return (
+    <>
+      <div className="row g-4" id="cardsContainer">
+        {cardsParaExibir.map((card, index) => (
+          <div key={index} className="col-md-4">
+            <div className="card bg-black text-white border-0 h-100">
+              <div className="image-wrapper">
+                <img src={card.imagem} className="img-fluid game-image" alt={card.titulo} />
+              </div>
+              <div className="card-body">
+                <small className="text-muted">Iara Games Brasil</small>
+                <h5 className="card-title mt-2">{card.titulo}</h5>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+      {temMaisCards && (
+        <div className="text-center my-5">
+          <button 
+            className="btn btn-vermais text-white"
+            onClick={() => setCardsExibidos(prev => prev + qtdePorClique)}
+          >
+            Ver mais
+          </button>
+        </div>
+      )}
+    </>
+  );
+};
+
+// NewsletterForm Component
+const NewsletterForm = () => {
+  const [nome, setNome] = React.useState('');
+  const [email, setEmail] = React.useState('');
+  const [mensagemSucesso, setMensagemSucesso] = React.useState(false);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (nome && email.includes('@') && email.includes('.')) {
+      setMensagemSucesso(true);
+      setNome('');
+      setEmail('');
+      setTimeout(() => setMensagemSucesso(false), 5000);
+    } else {
+      alert('Preencha os campos corretamente.');
+    }
+  };
+
+  return (
+    <form id="newsletterForm" className="row g-3" onSubmit={handleSubmit}>
+      <div className="col-md-6">
+        <input 
+          type="text"
+          className="form-control"
+          id="nome"
+          placeholder="Seu nome"
+          value={nome}
+          onChange={(e) => setNome(e.target.value)}
+          required
+        />
+      </div>
+      <div className="col-md-6">
+        <input 
+          type="email"
+          className="form-control"
+          id="email"
+          placeholder="Seu e-mail"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
+      </div>
+      <div className="col-12">
+        <button type="submit" className="btn btn-vermais-verde">Cadastrar</button>
+      </div>
+      {mensagemSucesso && (
+        <div className="mt-3 text-success">Cadastro realizado com sucesso!</div>
+      )}
+    </form>
+  );
+};
+
+// LoginModal Component
+const LoginModal = ({ isOpen, onClose, onLoginSuccess }) => {
+  const [email, setEmail] = React.useState('');
+  const [senha, setSenha] = React.useState('');
+  const [erro, setErro] = React.useState('');
+  const [carregando, setCarregando] = React.useState(false);
+  const { fazerLogin } = useAuth();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setErro('');
+    setCarregando(true);
+    const resultado = await fazerLogin(email, senha);
+    if (resultado.success) {
+      onClose();
+      setEmail('');
+      setSenha('');
+      if (onLoginSuccess) onLoginSuccess();
+      window.dispatchEvent(new Event('login-success'));
+    } else {
+      setErro(resultado.message || 'Erro ao fazer login');
+    }
+    setCarregando(false);
+  };
+
+  if (!isOpen) return null;
+
+  return (
+    <div className="login-modal-overlay" onClick={onClose}>
+      <div className="login-modal-content" onClick={(e) => e.stopPropagation()}>
+        <button className="login-modal-close" onClick={onClose}>×</button>
+        <div className="login-header">
+          <h2>Iara Games</h2>
+          <p>Faça login para continuar</p>
+        </div>
+        <form onSubmit={handleSubmit} className="login-form">
+          <div className="form-group">
+            <label htmlFor="email">Email</label>
+            <input
+              type="email"
+              id="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="seu@email.com"
+              required
+              disabled={carregando}
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="senha">Senha</label>
+            <input
+              type="password"
+              id="senha"
+              value={senha}
+              onChange={(e) => setSenha(e.target.value)}
+              placeholder="••••••••"
+              required
+              disabled={carregando}
+            />
+          </div>
+          {erro && <div className="erro-mensagem">{erro}</div>}
+          <button type="submit" className="btn-login" disabled={carregando}>
+            {carregando ? 'Entrando...' : 'Entrar'}
+          </button>
+        </form>
+        <div className="login-info">
+          <p className="info-text">Usuários de teste:</p>
+          <div className="credenciais">
+            <div><strong>admin@iaragames.com</strong> / admin123</div>
+            <div><strong>usuario@teste.com</strong> / senha123</div>
+            <div><strong>kaillani@iaragames.com</strong> / 123456</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// App Component
+const App = () => {
+  const [loginModalOpen, setLoginModalOpen] = React.useState(false);
+  const [key, setKey] = React.useState(0);
+
+  React.useEffect(() => {
+    const handleLoginSuccess = () => {
+      setKey(prev => prev + 1);
+    };
+    window.addEventListener('login-success', handleLoginSuccess);
+    return () => window.removeEventListener('login-success', handleLoginSuccess);
+  }, []);
+
+  React.useEffect(() => {
+    // Injeta o ícone de usuário no navbar
+    const userIconContainer = document.getElementById('user-icon-container');
+    if (userIconContainer && typeof React !== 'undefined' && typeof ReactDOM !== 'undefined') {
+      const renderUserIcon = () => {
+        try {
+          if (ReactDOM.createRoot) {
+            const root = ReactDOM.createRoot(userIconContainer);
+            root.render(<UserIcon key={key} onLoginClick={() => setLoginModalOpen(true)} />);
+          } else if (ReactDOM.render) {
+            ReactDOM.render(<UserIcon key={key} onLoginClick={() => setLoginModalOpen(true)} />, userIconContainer);
+          }
+        } catch (error) {
+          console.error('Erro ao renderizar UserIcon:', error);
+        }
+      };
+      // Aguarda um pouco mais para garantir que tudo está carregado
+      setTimeout(renderUserIcon, 500);
+    } else if (userIconContainer) {
+      // Fallback: cria um botão simples se React não estiver disponível
+      userIconContainer.innerHTML = `
+        <button 
+          class="icon-pessoa-btn"
+          onclick="document.getElementById('loginModalTrigger').click()"
+          title="Fazer login"
+        >
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 12C14.7614 12 17 9.76142 17 7C17 4.23858 14.7614 2 12 2C9.23858 2 7 4.23858 7 7C7 9.76142 9.23858 12 12 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M20.5899 22C20.5899 18.13 16.7399 15 11.9999 15C7.25991 15 3.40991 18.13 3.40991 22" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      `;
+    }
+
+    // Cards já são carregados via JavaScript puro, não precisa substituir
+
+    // Substitui o formulário de newsletter
+    const newsletterForm = document.getElementById('newsletterForm');
+    if (newsletterForm && newsletterForm.parentElement) {
+      const newsletterSection = newsletterForm.closest('section');
+      if (newsletterSection) {
+        const newContainer = document.createElement('div');
+        newContainer.id = 'newsletter-react-container';
+        newsletterSection.replaceChild(newContainer, newsletterForm);
+        
+        const renderNewsletter = () => {
+          if (ReactDOM.createRoot) {
+            const root = ReactDOM.createRoot(newContainer);
+            root.render(<NewsletterForm />);
+          } else {
+            ReactDOM.render(<NewsletterForm />, newContainer);
+          }
+        };
+        setTimeout(renderNewsletter, 200);
+      }
+    }
+  }, [key]);
+
+  return <LoginModal isOpen={loginModalOpen} onClose={() => setLoginModalOpen(false)} onLoginSuccess={() => setKey(prev => prev + 1)} />;
+};
+
+// Inicializa a aplicação
+const initApp = () => {
+  if (typeof React === 'undefined' || typeof ReactDOM === 'undefined') {
+    console.log('Aguardando React carregar...');
+    setTimeout(initApp, 200);
+    return;
+  }
+
+  console.log('React carregado, inicializando app...');
+
+  const rootElement = document.getElementById('react-root') || (() => {
+    const div = document.createElement('div');
+    div.id = 'react-root';
+    div.style.display = 'none';
+    document.body.appendChild(div);
+    return div;
+  })();
+  
+  try {
+    if (ReactDOM.createRoot) {
+      const root = ReactDOM.createRoot(rootElement);
+      root.render(
+        <AuthProvider>
+          <App />
+        </AuthProvider>
+      );
+    } else if (ReactDOM.render) {
+      ReactDOM.render(
+        <AuthProvider>
+          <App />
+        </AuthProvider>,
+        rootElement
+      );
+    }
+    console.log('App React inicializado');
+  } catch (error) {
+    console.error('Erro ao inicializar React:', error);
+  }
+};
+
+// Aguarda o DOM e também tenta inicializar após um delay
+document.addEventListener('DOMContentLoaded', () => {
+  setTimeout(initApp, 300);
+});
+</script>
+
+<!-- Script para funcionalidade do Saiba Mais e Cards (mantido em JS puro) -->
+<script>
+  // Alterna visibilidade do texto de detalhes
+  document.getElementById('saibaMaisBtn').addEventListener('click', function () {
+    const detalhes = document.getElementById('detalhesGTA');
+    detalhes.classList.toggle('d-none');
+  });
+
+  // Carrega cards de jogos (JavaScript puro para garantir funcionamento)
+  const todosCards = [
+    { titulo: "Grand Theft Auto V", imagem: "./Imagens/GTA 5.jpeg" },
+    { titulo: "Red Dead Redemption 2", imagem: "./Imagens/RED DEAD.jpeg" },
+    { titulo: "Bully", imagem: "./Imagens/Bully.jpeg" },
+    { titulo: "Call Of Duty", imagem: "./Imagens/Call Dutty.jpeg" },
+    { titulo: "Gears of War", imagem: "./Imagens/GEARS OF WAR.jpeg" },
+    { titulo: "Grand Theft Auto IV", imagem: "./Imagens/GTA 4.jpeg" },
+    { titulo: "Grand Theft Auto VI", imagem: "./Imagens/GTA 6 POSTER.jpeg" },
+    { titulo: "Grand Theft Auto San Andres", imagem: "./Imagens/GTA SAN ANDRES.jpeg" },
+    { titulo: "Call of Duty: Warzone", imagem: "./Imagens/Call Dutty.jpeg" }
+  ];
+
+  let cardsExibidos = 0;
+  const qtdePorClique = 3;
+
+  function criarCard({ titulo, imagem }) {
+    return `
+      <div class="col-md-4">
+        <div class="card bg-black text-white border-0 h-100">
+          <div class="image-wrapper">
+            <img src="${imagem}" class="img-fluid game-image" alt="${titulo}">
+          </div>
+          <div class="card-body">
+            <small class="text-muted">Iara Games Brasil</small>
+            <h5 class="card-title mt-2">${titulo}</h5>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  function carregarMaisCards() {
+    const container = document.getElementById('cardsContainer');
+    const proximos = todosCards.slice(cardsExibidos, cardsExibidos + qtdePorClique);
+    proximos.forEach(card => {
+      container.insertAdjacentHTML('beforeend', criarCard(card));
+    });
+    cardsExibidos += proximos.length;
+
+    const verMaisContainer = document.getElementById('verMaisContainer');
+    if (cardsExibidos >= todosCards.length) {
+      if (verMaisContainer) verMaisContainer.style.display = 'none';
+    } else {
+      if (verMaisContainer) verMaisContainer.style.display = 'block';
+    }
+  }
+
+  // Carrega os primeiros cards ao carregar a página
+  document.addEventListener('DOMContentLoaded', () => {
+    carregarMaisCards();
+    
+    const verMaisBtn = document.getElementById('verMaisBtn');
+    if (verMaisBtn) {
+      verMaisBtn.addEventListener('click', function (e) {
+        e.preventDefault();
+        carregarMaisCards();
+      });
+    }
+
+    // Fallback: adiciona ícone de pessoa e modal de login via JavaScript puro
+    setTimeout(() => {
+      const userIconContainer = document.getElementById('user-icon-container');
+      if (userIconContainer && userIconContainer.children.length === 0) {
+        // Se o container está vazio, React não funcionou, usa fallback
+        userIconContainer.innerHTML = `
+          <button 
+            class="icon-pessoa-btn"
+            id="userIconBtn"
+            onclick="abrirModalLogin()"
+            title="Fazer login"
+          >
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 12C14.7614 12 17 9.76142 17 7C17 4.23858 14.7614 2 12 2C9.23858 2 7 4.23858 7 7C7 9.76142 9.23858 12 12 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M20.5899 22C20.5899 18.13 16.7399 15 11.9999 15C7.25991 15 3.40991 18.13 3.40991 22" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        `;
+      }
+    }, 1000);
+  });
+
+  // Sistema de login via JavaScript puro (fallback)
+  const usuariosMock = [
+    { id: 1, email: 'admin@iaragames.com', senha: 'admin123', nome: 'Administrador' },
+    { id: 2, email: 'usuario@teste.com', senha: 'senha123', nome: 'Usuário Teste' },
+    { id: 3, email: 'kaillani@iaragames.com', senha: '123456', nome: 'Kaillani' }
+  ];
+
+  function abrirModalLogin() {
+    const modal = document.getElementById('loginModal');
+    if (modal) {
+      modal.style.display = 'flex';
+    } else {
+      criarModalLogin();
+    }
+  }
+
+  function fecharModalLogin() {
+    const modal = document.getElementById('loginModal');
+    if (modal) {
+      modal.style.display = 'none';
+    }
+  }
+
+  function criarModalLogin() {
+    const modalHTML = `
+      <div class="login-modal-overlay" id="loginModal" onclick="fecharModalLogin()">
+        <div class="login-modal-content" onclick="event.stopPropagation()">
+          <button class="login-modal-close" onclick="fecharModalLogin()">×</button>
+          <div class="login-header">
+            <h2>Iara Games</h2>
+            <p>Faça login para continuar</p>
+          </div>
+          <form id="loginFormJS" class="login-form" onsubmit="fazerLoginJS(event)">
+            <div class="form-group">
+              <label htmlFor="emailJS">Email</label>
+              <input
+                type="email"
+                id="emailJS"
+                name="email"
+                placeholder="seu@email.com"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label htmlFor="senhaJS">Senha</label>
+              <input
+                type="password"
+                id="senhaJS"
+                name="senha"
+                placeholder="••••••••"
+                required
+              />
+            </div>
+            <div id="erroLoginJS" class="erro-mensagem" style="display: none;"></div>
+            <button type="submit" class="btn-login" id="btnLoginJS">
+              Entrar
+            </button>
+          </form>
+          <div class="login-info">
+            <p class="info-text">Usuários de teste:</p>
+            <div class="credenciais">
+              <div><strong>admin@iaragames.com</strong> / admin123</div>
+              <div><strong>usuario@teste.com</strong> / senha123</div>
+              <div><strong>kaillani@iaragames.com</strong> / 123456</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+    document.body.insertAdjacentHTML('beforeend', modalHTML);
+  }
+
+  function fazerLoginJS(event) {
+    event.preventDefault();
+    const email = document.getElementById('emailJS').value;
+    const senha = document.getElementById('senhaJS').value;
+    const erroDiv = document.getElementById('erroLoginJS');
+    const btnLogin = document.getElementById('btnLoginJS');
+    
+    erroDiv.style.display = 'none';
+    btnLogin.disabled = true;
+    btnLogin.textContent = 'Entrando...';
+
+    // Simula delay de rede
+    setTimeout(() => {
+      const usuario = usuariosMock.find(u => u.email === email && u.senha === senha);
+      
+      if (usuario) {
+        // Login bem-sucedido
+        localStorage.setItem('token', `token_${usuario.id}_${Date.now()}`);
+        localStorage.setItem('usuario', JSON.stringify(usuario));
+        
+        // Atualiza o ícone para mostrar menu do usuário
+        atualizarIconeUsuario(usuario);
+        
+        fecharModalLogin();
+        document.getElementById('loginFormJS').reset();
+      } else {
+        erroDiv.textContent = 'Email ou senha incorretos';
+        erroDiv.style.display = 'block';
+      }
+      
+      btnLogin.disabled = false;
+      btnLogin.textContent = 'Entrar';
+    }, 1000);
+  }
+
+  function atualizarIconeUsuario(usuario) {
+    const userIconContainer = document.getElementById('user-icon-container');
+    if (userIconContainer) {
+      userIconContainer.innerHTML = `
+        <div class="menu-container" style="position: relative;">
+          <button 
+            class="icon-pessoa-btn"
+            id="userIconBtn"
+            onclick="toggleMenuUsuario()"
+            title="Menu do usuário"
+          >
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 12C14.7614 12 17 9.76142 17 7C17 4.23858 14.7614 2 12 2C9.23858 2 7 4.23858 7 7C7 9.76142 9.23858 12 12 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M20.5899 22C20.5899 18.13 16.7399 15 11.9999 15C7.25991 15 3.40991 18.13 3.40991 22" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <div class="menu-dropdown" id="menuUsuario" style="display: none;">
+            <div class="menu-item menu-user-info">
+              <div class="menu-user-name">${usuario.nome}</div>
+              <div class="menu-user-email">${usuario.email}</div>
+            </div>
+            <div class="menu-divider"></div>
+            <button class="menu-item menu-logout" onclick="fazerLogoutJS()">
+              Sair
+            </button>
+          </div>
+        </div>
+      `;
+    }
+  }
+
+  function toggleMenuUsuario() {
+    const menu = document.getElementById('menuUsuario');
+    if (menu) {
+      menu.style.display = menu.style.display === 'none' ? 'block' : 'none';
+    }
+  }
+
+  function fazerLogoutJS() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('usuario');
+    location.reload();
+  }
+
+  // Verifica se já está logado ao carregar
+  window.addEventListener('DOMContentLoaded', () => {
+    const token = localStorage.getItem('token');
+    const usuarioStr = localStorage.getItem('usuario');
+    if (token && usuarioStr) {
+      try {
+        const usuario = JSON.parse(usuarioStr);
+        atualizarIconeUsuario(usuario);
+      } catch (e) {
+        console.error('Erro ao carregar usuário:', e);
+      }
+    }
+    
+    // Fecha o modal ao clicar fora
+    document.addEventListener('click', (e) => {
+      const menu = document.getElementById('menuUsuario');
+      const btn = document.getElementById('userIconBtn');
+      if (menu && btn && !menu.contains(e.target) && !btn.contains(e.target)) {
+        menu.style.display = 'none';
+      }
+    });
+  });
+</script>
+</body>
+</html>

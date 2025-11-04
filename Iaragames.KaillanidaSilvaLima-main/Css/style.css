@@ -1,0 +1,420 @@
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.btn-purple {
+  background-color: #8a2be2;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 8px;
+  text-transform: uppercase;
+  font-weight: bold;
+  border: none;
+}
+
+.btn-purple:hover {
+  background-color: #6b20c4;
+}
+
+.card-title {
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.navbar a {
+  margin-left: 20px;
+}
+
+.image-wrapper {
+  width: 100%;
+  aspect-ratio: 1 / 1; /* Mantém a imagem quadrada */
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #1a1a1a;
+}
+
+.game-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s;
+}
+
+.game-image:hover {
+  transform: scale(1.03);
+}
+
+.card-title {
+  font-size: 1rem;
+  font-weight: bold;
+  color: white;
+}
+
+#jogos h2 {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-left: 0.5rem;
+}
+
+  .btn-vermais {
+    background-color: hsl(270, 100%, 50%); /* fundo sólido escuro */
+    color: white;
+    padding: 12px 32px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 500;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: background-color 0.3s, color 0.3s;
+  }
+
+  .btn-vermais:hover {
+    background-color: hsl(162, 100%, 38%); /* roxo no hover */
+    color: #fff;
+  }
+
+  .image-wrapper {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #1a1a1a;
+}
+
+.game-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s;
+}
+
+.game-image:hover {
+  transform: scale(1.03);
+}
+
+.card-title {
+  font-size: 1rem;
+  font-weight: bold;
+  color: white;
+}
+
+#vendas h2 {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-left: 0.5rem;
+}
+
+.btn-vermais-verde {
+  background-color: #1a1a1a;
+  color: #00ff88;
+  padding: 12px 32px;
+  border: 2px solid #00ff88;
+  border-radius: 8px;
+  font-weight: 500;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+.btn-vermais-verde:hover {
+  background-color: #00ff88;
+  color: #000;
+  border-color: #00ff88;
+}
+
+.navbar {
+  padding: 1rem 0;
+}
+
+.nav-link {
+  color: #fff !important;
+  margin-left: 15px;
+  transition: color 0.3s;
+}
+
+.nav-link:hover {
+  color: #00ff88 !important;
+}
+
+.navbar-brand {
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+/* Estilos para ícone de pessoa no navbar */
+.menu-container {
+  position: relative;
+  margin-left: 15px;
+}
+
+.icon-pessoa-btn {
+  background: transparent;
+  border: 2px solid #00ff88;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #00ff88;
+  transition: all 0.3s;
+  padding: 0;
+}
+
+.icon-pessoa-btn:hover {
+  background: #00ff88;
+  color: #000000;
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(0, 255, 136, 0.3);
+}
+
+.menu-dropdown {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  background: #1a1a1a;
+  border: 2px solid #00ff88;
+  border-radius: 8px;
+  min-width: 200px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  overflow: hidden;
+}
+
+.menu-item {
+  padding: 12px 16px;
+  color: #ffffff;
+  text-align: left;
+  width: 100%;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.menu-item:hover {
+  background: #2a2a2a;
+}
+
+.menu-user-info {
+  cursor: default;
+}
+
+.menu-user-info:hover {
+  background: transparent;
+}
+
+.menu-user-name {
+  font-weight: bold;
+  color: #00ff88;
+  margin-bottom: 4px;
+}
+
+.menu-user-email {
+  font-size: 0.85rem;
+  opacity: 0.7;
+}
+
+.menu-divider {
+  height: 1px;
+  background: #3a3a3a;
+  margin: 8px 0;
+}
+
+.menu-logout {
+  color: #ff4444;
+  font-weight: 500;
+}
+
+.menu-logout:hover {
+  background: rgba(255, 68, 68, 0.1);
+}
+
+/* Estilos para modal de login */
+.login-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+  padding: 20px;
+}
+
+.login-modal-content {
+  background: #1a1a1a;
+  border: 2px solid #00ff88;
+  border-radius: 16px;
+  padding: 40px;
+  width: 100%;
+  max-width: 450px;
+  box-shadow: 0 8px 32px rgba(0, 255, 136, 0.2);
+  position: relative;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.login-modal-close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: transparent;
+  border: none;
+  color: #ffffff;
+  font-size: 32px;
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.3s;
+}
+
+.login-modal-close:hover {
+  background: #2a2a2a;
+  color: #00ff88;
+}
+
+.login-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.login-header h2 {
+  color: #00ff88;
+  font-size: 2rem;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.login-header p {
+  color: #ffffff;
+  font-size: 1rem;
+  opacity: 0.8;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group label {
+  color: #ffffff;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.form-group input {
+  background: #2a2a2a;
+  border: 2px solid #3a3a3a;
+  border-radius: 8px;
+  padding: 12px 16px;
+  color: #ffffff;
+  font-size: 1rem;
+  transition: all 0.3s;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #00ff88;
+  box-shadow: 0 0 0 3px rgba(0, 255, 136, 0.1);
+}
+
+.form-group input:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.erro-mensagem {
+  background: #ff4444;
+  color: #ffffff;
+  padding: 12px;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.btn-login {
+  background: #00ff88;
+  color: #000000;
+  border: none;
+  border-radius: 8px;
+  padding: 14px 24px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s;
+  text-transform: uppercase;
+  margin-top: 10px;
+}
+
+.btn-login:hover:not(:disabled) {
+  background: #00cc6a;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 255, 136, 0.3);
+}
+
+.btn-login:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.login-info {
+  margin-top: 30px;
+  padding-top: 30px;
+  border-top: 1px solid #3a3a3a;
+}
+
+.info-text {
+  color: #ffffff;
+  font-size: 0.85rem;
+  margin-bottom: 15px;
+  opacity: 0.7;
+}
+
+.credenciais {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.credenciais div {
+  background: #2a2a2a;
+  padding: 10px;
+  border-radius: 6px;
+  color: #ffffff;
+  font-size: 0.85rem;
+  border-left: 3px solid #00ff88;
+}
+
+.credenciais strong {
+  color: #00ff88;
+}
+
+@media (max-width: 480px) {
+  .login-modal-content {
+    padding: 30px 20px;
+  }
+
+  .login-header h2 {
+    font-size: 1.5rem;
+  }
+}
